@@ -2,4 +2,4 @@
 - hosts: web
   become: true
   roles:
-    - role: '/home/ubuntu/ansi-nginx'
+    - role: '/home/ubuntu/nginx-role'

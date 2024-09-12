@@ -2,4 +2,8 @@
 # vars file for ansi-nginx
 #
 git_repo: 'https://github.com/alirezatayebinejad/ecommerce-website-html-css.git'
-remote_dir_path: '/home/ubuntu/ansible-example/' 
+remote_dir_path: '/home/ubuntu/ansible-example/'
+debian: ansible_facts['os_family'] == "Debian"
+CentOS: ansible_facts['os_family'] == "CentOS"
+
+
