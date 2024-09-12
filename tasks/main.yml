@@ -1,0 +1,53 @@
+---
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_facts['os_family'] == "CentOS"
+
+    - name: Remove file (delete file)
+      ansible.builtin.file:
+        path: /var/www/html/*
+        state: absent
+
+    - name: Remove file (delete file)
+      file:
+        path: "{{ remote_dir_path }}"
+        state: directory
+        state: absent
+
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: "{{ git_repo }}"
+        clone: yes
+        dest: "{{ remote_dir_path }}"
+        single_branch: yes
+        version: master
+
+    - name: Change file ownership, group and permissions
+      file:
+        path: /home/ubuntu/ansible-example/
+        state: directory
+        recurse: yes
+        owner: ubuntu
+        group: ubuntu
+        mode: u+rwx,g+rwx,o+rwx    
+
+    - name: copy code
+      copy:
+        src: "{{ remote_dir_path }}"
+        dest: /var/www/html/
+        remote_src: yes
+          #recurse: yes
+        owner: ubuntu
+        group: ubuntu
+      notify:
+        - start nginx
+        - start httpd
+      when: ansible_facts['os_family'] in  ["Debian", "CentOS"]

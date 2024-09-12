@@ -1,0 +1,5 @@
+---
+# vars file for ansi-nginx
+#
+git_repo: 'https://github.com/alirezatayebinejad/ecommerce-website-html-css.git'
+remote_dir_path: '/home/ubuntu/ansible-example/' 
