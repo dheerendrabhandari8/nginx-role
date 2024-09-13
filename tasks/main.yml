@@ -1,4 +1,6 @@
 ---
+#website will run in 8080 port. 
+
     - name: Install Nginx
       apt:
         name: nginx
@@ -14,7 +16,7 @@
       when: "{{ CentOS }}"  
      
 
-    - name: Remove file (delete file)
+    - name: Remove file (delete nginx defaul index.html file)
       ansible.builtin.file:
         path: /var/www/html/*
         state: absent
