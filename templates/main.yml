@@ -1,6 +1,6 @@
 - name: Template a file to /etc/nginx/sites-available/default
       ansible.builtin.template:
-        src: /home/ubuntu/default.j2
+        src: /files/default.j2
         dest: /etc/nginx/sites-available/default
         owner: ubuntu
         group: ubuntu
